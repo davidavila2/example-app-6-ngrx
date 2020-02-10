@@ -12,7 +12,8 @@
       "tags": []
     },
     "dashboard-e2e": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["dashboard"]
     },
     "core-data": {
       "tags": []
