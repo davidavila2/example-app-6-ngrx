@@ -7,14 +7,20 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es5",
-    "module": "es2015",
+    "target": "es2015",
+    "module": "esnext",
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@dashboard/core-data": ["libs/core-data/src/index.ts"],
+      "@dashboard/core-state": ["libs/core-state/src/index.ts"],
+      "@dashboard/ui-library": ["libs/ui-library/src/index.ts"],
+      "@dashboard/material": ["libs/material/src/index.ts"]
+    },
+    "rootDir": "."
   },
   "exclude": ["node_modules", "tmp"]
 }
