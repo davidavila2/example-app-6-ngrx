@@ -1,0 +1,20 @@
+<div class="container">
+
+  <div class="col-50">
+    <dashboard-computers-list 
+    [computers]="computers$ | async"
+    (selected)=selectComputer($event)
+    (deleted)="deleteComputer($event)"
+    >
+    </dashboard-computers-list>
+  </div>
+
+  <div class="col-50">
+    <dashboard-computers-details 
+    [form]="form"
+    [computer]="selectedComputer"
+    (saved)="saveComputer()"
+    (cancelled)="cancel()">
+  </dashboard-computers-details>
+  </div>
+</div>

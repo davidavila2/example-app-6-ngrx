@@ -1,0 +1,24 @@
+<div *ngIf="computer$ | async as computer" class="container-fixed container w-100">
+  <div class="card-wrapper">
+    <mat-card class="d-flex justify-content-center flex-column align-items-center">
+      <mat-card-header>
+        <mat-card-title>
+          <p class="text-center">{{computer.title}}</p>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <p class="text-center">{{computer.details}}</p>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="m-auto">
+        <p class="m-0 mr-3 text-center">Cool Level: {{computer.coolLevel}}</p>
+        <p class="m-0 text-center">{{computer.approved ? 'Approved': 'Not Approved!'}}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="goBackToComputers()">
+          <mat-icon>reply</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Computers</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let computer of computers" (click)="selected.emit(computer)">
+        <h3 mat-line>
+          {{computer.title}}
+        </h3>
+        <p mat-line>
+          {{computer.details}}
+        </p>
+        <button mat-icon-button (click)="deleted.emit(computer);$event.stopImmediatePropagation()">
+          <mat-icon *ngIf="!readonly">close</mat-icon>
+        </button>
+        <button mat-icon-button (click)="$event.stopImmediatePropagation()" [routerLink]="computer.id">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
