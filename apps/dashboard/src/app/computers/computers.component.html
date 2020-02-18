@@ -13,8 +13,9 @@
     <dashboard-computers-details 
     [form]="form"
     [computer]="selectedComputer"
-    (saved)="saveComputer()"
-    (cancelled)="cancel()">
+    (saved)="saveComputer($event)"
+    (cancelled)="resetComputer()">
   </dashboard-computers-details>
   </div>
 </div>
+

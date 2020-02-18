@@ -21,13 +21,11 @@
         <h4>Cool Level: {{currentComputer.coolLevel}}</h4>
         <mat-slider class="full-width" min="0" max="100" thumbLabel name="tasteLevel" formControlName="coolLevel" [value]="form.get('coolLevel').value">
         </mat-slider>
-        <mat-error *ngIf="form.get('coolLevel').hasError('required')">Required Field</mat-error>
       </section>
       <section>
         <mat-checkbox formControlName="approved" name="approved">
           Approved By You
         </mat-checkbox>
-        <mat-error *ngIf="form.get('approved').hasError('required')">Required Field</mat-error>
       </section>
     </mat-card-content>
     <mat-card-actions>

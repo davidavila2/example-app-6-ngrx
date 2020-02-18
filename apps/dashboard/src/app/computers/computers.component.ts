@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { Computer, ComputerService, NotifyService, emptyComputer } from '@dashboard/core-data';
+import { Computer, NotifyService, emptyComputer } from '@dashboard/core-data';
+import { ComputersFacade } from '@dashboard/core-state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dashboard-computers',
@@ -8,11 +10,42 @@ import { Computer, ComputerService, NotifyService, emptyComputer } from '@dashbo
   styleUrls: ['./computers.component.scss']
 })
 export class ComputersComponent implements OnInit {
-  computers$;
-  selectedComputer: Computer;
   form: FormGroup;
+  selectedComputer: Computer;
+  computers$: Observable<Computer[]> = this.computersFacade.allComputers$;
 
-  constructor(private computersService: ComputerService, private formBuilder: FormBuilder, private notify: NotifyService) { }
+  constructor(
+    private computersFacade: ComputersFacade,
+    private formBuilder: FormBuilder,
+    private notify: NotifyService
+  ) { }
+
+  ngOnInit() {
+    this.initForm();
+    this.computersFacade.loadComputers();
+    this.computersFacade.mutations$.subscribe(() => this.resetComputer())
+  }
+
+  selectComputer(computer: Computer) {
+    this.selectedComputer = computer;
+    this.form.patchValue(computer);
+  }
+
+  saveComputer(computer: Computer) {
+    if (computer.id) {
+      this.computersFacade.updateComputer(this.form.value);
+      this.notify.notification(`You have updated ${this.form.value.title}`);
+      return
+    } else {
+      this.computersFacade.createComputer(this.form.value);
+      this.notify.notification(`You have updated ${this.form.value.title}`);
+    }
+  }
+
+  deleteComputer(computer: Computer) {
+    this.computersFacade.deleteComputer(computer)
+  }
+
 
   resetComputer() {
     this.form.reset();
@@ -23,64 +56,13 @@ export class ComputersComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.getComputers();
-    this.initForm();
-    this.resetComputer();
-  }
-
-  selectComputer(computer: Computer) {
-    this.selectedComputer = computer;
-    this.form.patchValue(computer);
-  }
-
-  getComputers() {
-    this.computers$ = this.computersService.all();
-  }
-
-  saveComputer() {
-    if (!this.form.value.id) {
-      this.createComputer();
-    } else {
-      this.updateComputer();
-    }
-  }
-
-  updateComputer() {
-    this.computersService.update(this.form.value)
-      .subscribe(() => {
-        this.getComputers();
-        this.resetComputer();
-      });
-      this.notify.notification(`You have updated ${this.form.value.title}`);
-  }
-
-  createComputer() {
-    this.computersService.create(this.form.value)
-      .subscribe(() => {
-        this.getComputers();
-        this.resetComputer();
-      });
-      this.notify.notification(`You have created ${this.form.value.title}`);
-  }
-
-  deleteComputer(computer) {
-    this.computersService.delete(computer.id)
-      .subscribe(() => this.getComputers());
-      this.notify.notification(`You have deleted ${computer.title}`);
-  }
-
-  cancel() {
-    this.resetComputer();
-  }
-
   private initForm() {
     this.form = this.formBuilder.group({
       id: null,
       title: ['', Validators.compose([Validators.required])],
       details: ['', Validators.compose([Validators.required])],
-      coolLevel: ['', Validators.compose([Validators.required])],
-      approved: ['', Validators.compose([Validators.required])]
+      coolLevel: [''],
+      approved: ['']
     });
   }
 }

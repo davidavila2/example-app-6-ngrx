@@ -21,32 +21,32 @@ export class ComputersEffect {
         );
       },
       onError: (action: ReturnType<typeof computersActions.loadComputers>, error) => {
-        console.log('Effect Error:', error);
+        this.notify.notification('Effect Error:', error);
       }
     })
   );
 
-  loadComputer$ = createEffect(() =>
-    this.dataPersistence.fetch(computersActions.loadComputer, {
-      run: (
-        action: ReturnType<typeof computersActions.loadComputer>,
-        state: ComputersPartialState
-      ) => {
-        return this.computersService.findOne(action.computerId).pipe(
-          map((computer: Computer) => computersActions.computerLoaded({ computer }))
-        );
-      },
-      onError: (action: ReturnType<typeof computersActions.loadComputer>, error) => {
-        console.log('Effect Error:', error);
-      }
-    })
-  );
+  // loadComputer$ = createEffect(() =>
+  //   this.dataPersistence.fetch(computersActions.loadComputer, {
+  //     run: (
+  //       action: ReturnType<typeof computersActions.loadComputer>,
+  //       state: ComputersPartialState
+  //     ) => {
+  //       return this.computersService.findOne(action.computerId).pipe(
+  //         map((computer: Computer) => computersActions.computerLoaded({ computer }))
+  //       );
+  //     },
+  //     onError: (action: ReturnType<typeof computersActions.loadComputer>, error) => {
+  //       this.notify.notification('Effect Error:', error);
+  //     }
+  //   })
+  // );
 
-  selectComputerOnLoad$ = createEffect(() =>
-    this.dataPersistence.actions.pipe(
-      ofType(computersActions.computerLoaded),
-      map(({ computer }) => computersActions.computerSelected({ selectedComputerId: computer.id }))
-    ))
+  // selectComputerOnLoad$ = createEffect(() =>
+  //   this.dataPersistence.actions.pipe(
+  //     ofType(computersActions.computerLoaded),
+  //     map(({ computer }) => computersActions.computerSelected({ selectedComputerId: computer.id }))
+  //   ))
 
   createComputer$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(computersActions.createComputer, {
@@ -55,12 +55,12 @@ export class ComputersEffect {
         state: ComputersPartialState
       ) => {
         return this.computersService.create(action.computer).pipe(
+          tap((computer: Computer) => console.log(computer)),
           map((computer: Computer) => computersActions.computerCreated({ computer })),
-          tap(() => this.notify.notification('dasf'))
         );
       },
       onError: (action: ReturnType<typeof computersActions.createComputer>, error) => {
-        console.log('Effect Error:', error);
+        this.notify.notification('Effect Error:', error);
       }
     }))
 
@@ -71,11 +71,13 @@ export class ComputersEffect {
         state: ComputersPartialState
       ) => {
         return this.computersService.update(action.computer).pipe(
-          map((computer: Computer) => computersActions.updateComputer({ computer }))
+          map((computer: Computer) => computersActions.computerUpdated({ computer })),
+          tap(() => this.computersService.all())
+
         );
       },
       onError: (action: ReturnType<typeof computersActions.updateComputer>, error) => {
-        console.log('Effect Error:', error);
+        this.notify.notification('Effect Error:', error);
       }
     })
   );
@@ -87,11 +89,12 @@ export class ComputersEffect {
         state: ComputersPartialState
       ) => {
         return this.computersService.delete(action.computer).pipe(
+          tap(() => console.log(action.computer.id)),
           map(() => computersActions.computerDeleted({ computer: action.computer }))
         );
       },
       onError: (action: ReturnType<typeof computersActions.deleteComputer>, error) => {
-        console.log('Effect Error:', error);
+        this.notify.notification('Effect delete Error: ', error);
       }
     })
   );

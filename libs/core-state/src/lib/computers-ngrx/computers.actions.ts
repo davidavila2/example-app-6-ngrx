@@ -11,20 +11,21 @@ export const computerSelected = createAction(
 // Load Actions
 export const loadComputers = createAction('[COMPUTER] Load Computers');
 
-export const loadComputer = createAction(
-  '[COMPUTER] Load Computer',
-  props<{ computerId: string }>()
-);
-
 export const computersLoaded = createAction(
   '[COMPUTER] Computers Loaded',
   props<{ computers: Computer[] }>()
 );
 
-export const computerLoaded = createAction( 
-  '[COMPUTER] Computer Loaded',
-  props<{ computer: Computer }>()
-);
+// export const loadComputer = createAction(
+//   '[COMPUTER] Load Computer',
+//   props<{ computerId: string }>()
+// );
+
+// export const computerLoaded = createAction( 
+//   '[COMPUTER] Computer Loaded',
+//   props<{ computer: Computer }>()
+// );
+
 
 // Create Actions
 export const createComputer = createAction(

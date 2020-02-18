@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Computer } from './computer';
 
 const BASE_URL = 'https://server-30-x-30.herokuapp.com/';
 
@@ -20,23 +21,23 @@ export class ComputerService {
   }
 
 
-  findOne(projectId) {
-    return this.httpClient.get(this.getUrlForId(projectId));
+  findOne(computer: Computer) {
+    return this.httpClient.get(this.getUrlForId(computer));
   }
 
-  create(project) {
-    return this.httpClient.post(this.getUrl(), project);
+  create(computer: Computer) {
+    return this.httpClient.post(this.getUrl(), computer);
   }
 
   getUrlForId(id) {
     return `${this.getUrl()}/${id}`;
   }
 
-  update(project) {
-    return this.httpClient.patch(this.getUrlForId(project.id), project)
+  update(computer: Computer) {
+    return this.httpClient.patch(this.getUrlForId(computer.id), computer)
   }
 
-  delete(projectId) {
-    return this.httpClient.delete(this.getUrlForId(projectId))
+  delete(computer: Computer) {
+    return this.httpClient.delete(this.getUrlForId(computer.id))
   }
 }
