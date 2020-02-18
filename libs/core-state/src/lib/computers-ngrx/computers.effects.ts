@@ -55,7 +55,6 @@ export class ComputersEffect {
         state: ComputersPartialState
       ) => {
         return this.computersService.create(action.computer).pipe(
-          tap((computer: Computer) => console.log(computer)),
           map((computer: Computer) => computersActions.computerCreated({ computer })),
         );
       },
@@ -89,7 +88,6 @@ export class ComputersEffect {
         state: ComputersPartialState
       ) => {
         return this.computersService.delete(action.computer).pipe(
-          tap(() => console.log(action.computer.id)),
           map(() => computersActions.computerDeleted({ computer: action.computer }))
         );
       },
