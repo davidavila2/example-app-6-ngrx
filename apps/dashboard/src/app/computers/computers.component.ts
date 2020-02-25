@@ -26,27 +26,6 @@ export class ComputersComponent implements OnInit {
     this.computersFacade.mutations$.subscribe(() => this.resetComputer())
   }
 
-  selectComputer(computer: Computer) {
-    this.selectedComputer = computer;
-    this.form.patchValue(computer);
-  }
-
-  saveComputer(computer: Computer) {
-    if (computer.id) {
-      this.computersFacade.updateComputer(this.form.value);
-      this.notify.notification(`You have updated ${this.form.value.title}`);
-      return
-    } else {
-      this.computersFacade.createComputer(this.form.value);
-      this.notify.notification(`You have updated ${this.form.value.title}`);
-    }
-  }
-
-  deleteComputer(computer: Computer) {
-    this.computersFacade.deleteComputer(computer)
-  }
-
-
   resetComputer() {
     this.form.reset();
     this.selectComputer(emptyComputer);
@@ -54,6 +33,34 @@ export class ComputersComponent implements OnInit {
     Object.keys(this.form.controls).forEach((key) => {
       this.form.get(key).setErrors(null);
     });
+  }
+
+  selectComputer(computer: Computer) {
+    this.selectedComputer = computer;
+    this.form.patchValue(computer);
+  }
+
+  createComputer() {
+    this.notify.notification(`You have created ${this.form.value.title}`);
+    this.computersFacade.createComputer(this.form.value);
+  }
+
+  updateComputer() {
+    this.notify.notification(`You have updated ${this.form.value.title}`);
+    this.computersFacade.updateComputer(this.form.value);
+  }
+
+  saveComputer(computer: Computer) {
+    if (computer.id) {
+      this.updateComputer();
+    } else {
+      this.createComputer();
+    }
+  }
+
+  deleteComputer(computer: Computer) {
+    this.notify.notification(`You have deleted ${computer.title}`);
+    this.computersFacade.deleteComputer(computer);
   }
 
   private initForm() {
