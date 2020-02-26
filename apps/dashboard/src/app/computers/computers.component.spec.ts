@@ -4,7 +4,7 @@ import { ComputersComponent } from './computers.component';
 import { ComputersFacade, defaultState } from '@dashboard/core-state';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MaterialModule } from '@dashboard/material';
-import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ComputersDetailsComponent } from './computers-details/computers-details.component';
 import { ComputersListComponent } from './computers-list/computers-list.component';
@@ -25,6 +25,13 @@ describe('ComputersComponent', () => {
     "id": 21,
     "title": "This is a test"
   }
+  const testForm = {
+    id: null,
+    title: '',
+    details: '',
+    coolLevel: '',
+    approved: ''
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -36,9 +43,7 @@ describe('ComputersComponent', () => {
         ReactiveFormsModule
       ],
       declarations: [
-        ComputersComponent,
-        ComputersDetailsComponent,
-        ComputersListComponent
+        ComputersComponent
       ],
       providers: [
         provideMockStore(),
@@ -58,10 +63,10 @@ describe('ComputersComponent', () => {
     computersFacade = TestBed.get(ComputersFacade);
     component.form = formBuilder.group({
       id: null,
-      title: null,
-      details: null,
-      coolLevel: null,
-      approved: null
+      title: '',
+      details: '',
+      coolLevel: '',
+      approved: ''
     })
     fixture.detectChanges();
   });
@@ -119,6 +124,11 @@ describe('ComputersComponent', () => {
       jest.spyOn(computersFacade, 'loadComputers');
       expect(computersFacade.loadComputers).toBeTruthy();
     });
+
+    // it('something', () => {
+    //   jest.spyOn(component.form, 'initForm');
+    //   expect(component.form.value).toHaveBeenCalledWith(testForm);
+    // })
 
     it('should reset form on mutations', () => {
       jest.spyOn(component, 'resetComputer');

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Computer } from '@dashboard/core-data';
 
 @Component({
@@ -6,13 +6,8 @@ import { Computer } from '@dashboard/core-data';
   templateUrl: './computers-list.component.html',
   styleUrls: ['./computers-list.component.scss']
 })
-export class ComputersListComponent implements OnInit {
+export class ComputersListComponent {
   @Input() computers: Computer[]
-  @Input() readonly = false;
   @Output() selected = new EventEmitter();
   @Output() deleted = new EventEmitter();
-
-  ngOnInit() {
-    
-  }
 }
