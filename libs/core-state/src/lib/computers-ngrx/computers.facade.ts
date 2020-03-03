@@ -28,7 +28,7 @@ export class ComputersFacade {
     private store: Store<fromComputers.ComputersPartialState>
   ) { }
   
-  selectComputer(selectedComputerId: string) {
+  selectComputer(selectedComputerId: string | number) {
     this.dispatch(computersActions.computerSelected({ selectedComputerId }));
   }
 

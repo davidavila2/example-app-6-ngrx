@@ -8,7 +8,6 @@ import { Computer } from '@dashboard/core-data';
 })
 export class ComputersListComponent {
   @Input() computers: Computer[]
-  @Input() readonly = false;
   @Output() selected = new EventEmitter();
   @Output() deleted = new EventEmitter();
 }

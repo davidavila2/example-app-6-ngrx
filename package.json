@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "deploy": "ng build --prod && cp ./dist/apps/dashboard/index.html ./dist/apps/dashboard/200.html && surge ./dist/apps/dashboard/ https://exmple-app-six-ngrx.surge.sh",
+    "deploy": "ng build --prod && cp ./dist/apps/dashboard/index.html ./dist/apps/dashboard/200.html && surge ./dist/apps/dashboard/ https://example-app-six-ngrx.surge.sh",
     "lint": "./node_modules/.bin/nx workspace-lint && ng lint",
     "e2e": "ng e2e",
     "affected:apps": "./node_modules/.bin/nx affected:apps",

@@ -9,3 +9,7 @@ export interface AppState {
 export const reducers: ActionReducerMap<AppState> = {
   computers: fromComputers.reducer
 }
+
+export const defaultState: AppState = {
+  computers: { ids: [] } as fromComputers.ComputersState
+}

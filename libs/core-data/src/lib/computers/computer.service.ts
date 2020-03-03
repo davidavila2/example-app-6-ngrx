@@ -20,7 +20,6 @@ export class ComputerService {
     return this.httpClient.get(this.getUrl())
   }
 
-
   findOne(computer: Computer) {
     return this.httpClient.get(this.getUrlForId(computer));
   }
