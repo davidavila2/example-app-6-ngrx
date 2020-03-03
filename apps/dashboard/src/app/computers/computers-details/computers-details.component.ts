@@ -8,8 +8,6 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./computers-details.component.scss']
 })
 export class ComputersDetailsComponent {
-  currentComputer: Computer;
-  originalTitle;
   @Input() set computer(value) {
     if (value) this.originalTitle = value.title;
     this.currentComputer = Object.assign({}, value)
@@ -18,4 +16,7 @@ export class ComputersDetailsComponent {
 
   @Output() saved = new EventEmitter();
   @Output() cancelled = new EventEmitter();
+
+  currentComputer: Computer;
+  originalTitle;
 }

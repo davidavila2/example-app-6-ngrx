@@ -43,7 +43,9 @@ describe('ComputersComponent', () => {
         ReactiveFormsModule
       ],
       declarations: [
-        ComputersComponent
+        ComputersComponent,
+        ComputersDetailsComponent,
+        ComputersListComponent
       ],
       providers: [
         provideMockStore(),
@@ -105,8 +107,8 @@ describe('ComputersComponent', () => {
       component.form.patchValue(testObject);
       component.createComputer();
       expect(computersFacade.createComputer).toHaveBeenCalledWith(testObject);
-    })
-  })
+    });
+  });
 
   describe('#update', () => {
     it('should create a computer', () => {
