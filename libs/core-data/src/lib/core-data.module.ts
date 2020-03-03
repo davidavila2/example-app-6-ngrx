@@ -7,6 +7,6 @@ import { ComputerService } from './computers/computer.service';
   imports: [
     CommonModule,
     HttpClientModule
-  ],
+  ]
 })
 export class CoreDataModule {}

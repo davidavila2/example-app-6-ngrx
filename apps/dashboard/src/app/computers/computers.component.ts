@@ -36,7 +36,7 @@ export class ComputersComponent implements OnInit {
   }
 
   selectComputer(computer: Computer) {
-    this.selectedComputer = computer;
+    this.computersFacade.selectComputer(computer.id);
     this.form.patchValue(computer);
   }
 

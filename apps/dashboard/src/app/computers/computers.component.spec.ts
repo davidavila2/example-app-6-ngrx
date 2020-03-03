@@ -127,11 +127,6 @@ describe('ComputersComponent', () => {
       expect(computersFacade.loadComputers).toBeTruthy();
     });
 
-    // it('something', () => {
-    //   jest.spyOn(component.form, 'initForm');
-    //   expect(component.form.value).toHaveBeenCalledWith(testForm);
-    // })
-
     it('should reset form on mutations', () => {
       jest.spyOn(component, 'resetComputer');
       component.form.patchValue(testObject);
