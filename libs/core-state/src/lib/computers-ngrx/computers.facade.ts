@@ -36,9 +36,9 @@ export class ComputersFacade {
     this.dispatch(computersActions.loadComputers());
   }
 
-  // loadComputer(computerId: string) {
-  //   this.dispatch(computersActions.loadComputer({ computerId }));
-  // }
+  loadComputer(computer: Computer) {
+    this.dispatch(computersActions.loadComputer({ computer }));
+  }
 
   createComputer(computer: Computer) {
     this.dispatch(computersActions.createComputer({computer}))
@@ -55,5 +55,4 @@ export class ComputersFacade {
   private dispatch(action: Action) {
     this.store.dispatch(action);
   }
-
 }

@@ -16,16 +16,15 @@ export const computersLoaded = createAction(
   props<{ computers: Computer[] }>()
 );
 
-// export const loadComputer = createAction(
-//   '[COMPUTER] Load Computer',
-//   props<{ computerId: string }>()
-// );
+export const loadComputer = createAction(
+  '[COMPUTER] Load Computer',
+  props<{ computer: Computer }>()
+);
 
-// export const computerLoaded = createAction( 
-//   '[COMPUTER] Computer Loaded',
-//   props<{ computer: Computer }>()
-// );
-
+export const computerLoaded = createAction( 
+  '[COMPUTER] Computer Loaded',
+  props<{ computer: Computer }>()
+);
 
 // Create Actions
 export const createComputer = createAction(

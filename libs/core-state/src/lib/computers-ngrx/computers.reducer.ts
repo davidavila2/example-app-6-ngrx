@@ -33,7 +33,7 @@ const computersReducer = createReducer(
     computersAdapter.addAll(computers, { ...state, isLoading: false })
   ),
   on(
-    // computersActions.computerLoaded,
+    computersActions.computerLoaded,
     computersActions.computerCreated, (state, { computer }) =>
       computersAdapter.addOne(computer, { ...state, isLoading: false })
   ),
@@ -45,7 +45,7 @@ const computersReducer = createReducer(
   ),
   on(
     computersActions.loadComputers,
-    // computersActions.loadComputer,
+    computersActions.loadComputer,
     computersActions.createComputer,
     computersActions.updateComputer,
     computersActions.deleteComputer,
