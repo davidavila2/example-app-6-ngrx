@@ -23,7 +23,7 @@ export class ComputersComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.computersFacade.loadComputers();
-    this.computersFacade.mutations$.subscribe(() => this.resetComputer())
+    this.computersFacade.mutations$.subscribe(() => this.resetComputer());
   }
 
   resetComputer() {
@@ -37,6 +37,7 @@ export class ComputersComponent implements OnInit {
 
   selectComputer(computer: Computer) {
     this.computersFacade.selectComputer(computer.id);
+    this.selectedComputer = computer;
     this.form.patchValue(computer);
   }
 

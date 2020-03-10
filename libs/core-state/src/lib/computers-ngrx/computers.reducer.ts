@@ -23,7 +23,7 @@ export const initialState: ComputersState = computersAdapter.getInitialState({
   isLoading: false
 });
 
-const computersReducer = createReducer(
+export const computersReducer = createReducer(
   initialState,
   on(computersActions.computerSelected, (state, { selectedComputerId }) =>
     Object.assign({}, state, { selectedComputerId })
@@ -33,9 +33,9 @@ const computersReducer = createReducer(
     computersAdapter.addAll(computers, { ...state, isLoading: false })
   ),
   on(
-    // computersActions.computerLoaded,
+    computersActions.computerLoaded,
     computersActions.computerCreated, (state, { computer }) =>
-      computersAdapter.addOne(computer, { ...state, isLoading: false })
+    computersAdapter.addOne(computer, { ...state, isLoading: false })
   ),
   on(computersActions.computerUpdated, (state, { computer }) =>
     computersAdapter.upsertOne(computer, { ...state, isLoading: false })
@@ -45,7 +45,7 @@ const computersReducer = createReducer(
   ),
   on(
     computersActions.loadComputers,
-    // computersActions.loadComputer,
+    computersActions.loadComputer,
     computersActions.createComputer,
     computersActions.updateComputer,
     computersActions.deleteComputer,

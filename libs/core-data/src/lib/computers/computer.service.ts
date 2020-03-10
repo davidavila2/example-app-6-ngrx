@@ -31,7 +31,7 @@ export class ComputerService {
   getUrlForId(id) {
     return `${this.getUrl()}/${id}`;
   }
-
+  
   update(computer: Computer) {
     return this.httpClient.patch(this.getUrlForId(computer.id), computer)
   }

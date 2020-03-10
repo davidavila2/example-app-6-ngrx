@@ -26,27 +26,20 @@ export class ComputersEffect {
     })
   );
 
-  // loadComputer$ = createEffect(() =>
-  //   this.dataPersistence.fetch(computersActions.loadComputer, {
-  //     run: (
-  //       action: ReturnType<typeof computersActions.loadComputer>,
-  //       state: ComputersPartialState
-  //     ) => {
-  //       return this.computersService.findOne(action.computerId).pipe(
-  //         map((computer: Computer) => computersActions.computerLoaded({ computer }))
-  //       );
-  //     },
-  //     onError: (action: ReturnType<typeof computersActions.loadComputer>, error) => {
-  //       this.notify.notification('Effect Error:', error);
-  //     }
-  //   })
-  // );
-
-  // selectComputerOnLoad$ = createEffect(() =>
-  //   this.dataPersistence.actions.pipe(
-  //     ofType(computersActions.computerLoaded),
-  //     map(({ computer }) => computersActions.computerSelected({ selectedComputerId: computer.id }))
-  //   ))
+  loadComputer$ = createEffect(() => 
+    this.dataPersistence.fetch(computersActions.loadComputer, {
+      run: (
+        action: ReturnType<typeof computersActions.loadComputer>,
+        state: ComputersPartialState
+      ) => {
+        return this.computersService.findOne(action.computer)
+        .pipe(map((computer: Computer) => computersActions.computerLoaded({computer})))
+      },
+      onError: (action: ReturnType<typeof computersActions.loadComputer>, error) => {
+        this.notify.notification('Effect Error: ', error);
+      }
+    }))
+  
 
   createComputer$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(computersActions.createComputer, {
@@ -70,9 +63,7 @@ export class ComputersEffect {
         state: ComputersPartialState
       ) => {
         return this.computersService.update(action.computer).pipe(
-          map((computer: Computer) => computersActions.computerUpdated({ computer })),
-          tap(() => this.computersService.all())
-
+          map((computer: Computer) => computersActions.computerUpdated({ computer }))
         );
       },
       onError: (action: ReturnType<typeof computersActions.updateComputer>, error) => {
