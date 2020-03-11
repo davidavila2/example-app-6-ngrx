@@ -29,30 +29,26 @@ export class ComputersFacade {
   ) { }
   
   selectComputer(selectedComputerId: string | number) {
-    this.dispatch(computersActions.computerSelected({ selectedComputerId }));
+    this.store.dispatch(computersActions.computerSelected({ selectedComputerId }));
   }
 
   loadComputers() {
-    this.dispatch(computersActions.loadComputers());
+    this.store.dispatch(computersActions.loadComputers());
   }
 
   loadComputer(computer: Computer) {
-    this.dispatch(computersActions.loadComputer({ computer }));
+    this.store.dispatch(computersActions.loadComputer({ computer }));
   }
 
   createComputer(computer: Computer) {
-    this.dispatch(computersActions.createComputer({computer}))
+    this.store.dispatch(computersActions.createComputer({computer}))
   }
 
   updateComputer(computer: Computer) {
-    this.dispatch(computersActions.updateComputer({computer}))
+    this.store.dispatch(computersActions.updateComputer({computer}))
   }
 
   deleteComputer(computer: Computer) {
-    this.dispatch(computersActions.deleteComputer({computer}))
-  }
-
-  private dispatch(action: Action) {
-    this.store.dispatch(action);
+    this.store.dispatch(computersActions.deleteComputer({computer}))
   }
 }
