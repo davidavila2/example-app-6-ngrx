@@ -1,9 +1,10 @@
-<div class="container">
+<h1 class="primary d-flex justify-content-center pt-2">This is a Master Detail View Being tested</h1>
 
+<div class="container">
   <div class="col-50">
     <dashboard-computers-list 
     [computers]="computers$ | async"
-    (selected)=selectComputer($event)
+    (selected)="selectComputer($event)"
     (deleted)="deleteComputer($event)"
     >
     </dashboard-computers-list>
@@ -12,7 +13,7 @@
   <div class="col-50">
     <dashboard-computers-details 
     [form]="form"
-    [computer]="selectedComputer"
+    [computer]="selectedComputer$ | async"
     (saved)="saveComputer($event)"
     (cancelled)="resetComputer()">
   </dashboard-computers-details>

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class ComputersComponent implements OnInit {
   form: FormGroup;
-  selectedComputer: Computer;
+  selectedComputer$ = this.computersFacade.selectedComputer$;
   computers$: Observable<Computer[]> = this.computersFacade.allComputers$;
 
   constructor(
@@ -37,7 +37,7 @@ export class ComputersComponent implements OnInit {
 
   selectComputer(computer: Computer) {
     this.computersFacade.selectComputer(computer.id);
-    this.selectedComputer = computer;
+    // this.selectedComputer = computer;
     this.form.patchValue(computer);
   }
 

@@ -13,10 +13,10 @@
         <p mat-line>
           {{computer.details}}
         </p>
-        <button mat-icon-button (click)="deleted.emit(computer);$event.stopImmediatePropagation()">
+        <button class="delete" mat-icon-button (click)="deleted.emit(computer);$event.stopImmediatePropagation()">
           <mat-icon>close</mat-icon>
         </button>
-        <button mat-icon-button (click)="$event.stopImmediatePropagation()" [routerLink]="computer.id">
+        <button class="reroute" mat-icon-button (click)="$event.stopImmediatePropagation()" [routerLink]="computer.id">
           <mat-icon>more_vert</mat-icon>
         </button>
       </mat-list-item>
